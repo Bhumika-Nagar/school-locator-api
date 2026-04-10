@@ -8,6 +8,11 @@ import router from "./routes/schoolRoutes.js";
 const app = express();
 
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("api is running");
+})
+
 app.use("/api", router);
 
 app.use((err, req, res, next) => {
@@ -18,10 +23,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-
-app.get("/", (req, res) => {
-  res.send("api is running");
-})
 
 async function startServer() {
   try {
