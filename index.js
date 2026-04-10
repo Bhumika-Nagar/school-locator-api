@@ -10,11 +10,6 @@ const app = express();
 app.use(express.json());
 app.use("/api", router);
 
-
-app.get("/", (req, res) => {
-  res.send("api is running");
-});
-
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({
@@ -23,8 +18,17 @@ app.use((err, req, res, next) => {
   });
 });
 
+
+app.get("/", (req, res) => {
+  res.send("api is running");
+})
+
 async function startServer() {
-  await db();
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error("DB failed but starting server anyway");
+  }
 
   const PORT = process.env.PORT || 5000;
 
