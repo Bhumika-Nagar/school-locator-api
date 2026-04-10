@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+import  {db}  from "./db.js";
 import express from "express";
 
 import router from "./routes/schoolRoutes.js";
 
 const app= express();
-const PORT= process.env.PORT;
+const PORT= process.env.MYSQLPORT;
 app.use(express.json());
 
 app.use("/api", router);
@@ -20,6 +20,14 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, ()=>{
-    console.log(`server running on port ${PORT}`)
-});
+async function startServer() {
+  await db(); 
+
+  app.listen(PORT, () => {
+    console.log("Server running");
+  });
+}
+
+startServer();
+
+

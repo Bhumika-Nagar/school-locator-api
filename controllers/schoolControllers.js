@@ -1,6 +1,6 @@
 import express from "express";
 import { getDistance } from "../utils/distance.js";
-import db from "../db.js";
+import {db} from "../db.js";
 export const addSchool= async (req, res, next) => {
   try {
     const { name, address, latitude, longitude } = req.body;
