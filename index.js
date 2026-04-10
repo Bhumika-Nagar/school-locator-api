@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 
 async function startServer() {
   try {
-    await connectDB();
+    await db();
   } catch (err) {
     console.error("DB failed but starting server anyway");
   }
