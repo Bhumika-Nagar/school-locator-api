@@ -3,7 +3,7 @@ dotenv.config({ path: "./.env" });
 
 import mysql from "mysql2/promise";
 
-let connection = null;
+let connection;
 
 export async function db() {
   try{
