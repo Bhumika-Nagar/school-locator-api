@@ -7,12 +7,6 @@ let connection = null;
 
 export async function db() {
   try{
-    console.log("ENV CHECK:", {
-      host: process.env.MYSQLHOST,
-      port: process.env.MYSQLPORT,
-      user: process.env.MYSQLUSER,
-      database: process.env.MYSQLDATABASE,
-    });
 
     connection = await mysql.createConnection({
       host: process.env.MYSQLHOST,
