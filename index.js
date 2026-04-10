@@ -20,6 +20,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(process.env.PORT, ()=>{
+app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`)
 });
