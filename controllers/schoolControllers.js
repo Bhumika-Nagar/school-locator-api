@@ -27,6 +27,7 @@ export const addSchool= async (req, res, next) => {
     });
 
   } catch (err) {
+    console.error("post schools error:", err);
     next(err); 
   }
 };
@@ -62,6 +63,7 @@ export const listSchools= async (req, res, next) => {
     res.json(sorted);
 
   } catch (err) {
+    console.error("list schools error:", err);
     next(err);
   }
 };
