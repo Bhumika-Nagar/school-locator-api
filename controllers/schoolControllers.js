@@ -1,6 +1,6 @@
 import express from "express";
 import { getDistance } from "../utils/distance.js";
-import {db} from "../db.js";
+import {getDB} from "../db.js";
 export const addSchool= async (req, res, next) => {
   try {
     const { name, address, latitude, longitude } = req.body;
@@ -16,10 +16,10 @@ export const addSchool= async (req, res, next) => {
       return res.status(400).json({ message: "Invalid coordinates" });
     }
 
+    const connection = getDB();
     const query = `INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)`;
     
-
-    await db.execute(query, [name, address, lat, lon]);
+    await connection.execute(query, [name, address, lat, lon]);
 
     res.status(201).json({
       message: "School added successfully",
@@ -43,7 +43,8 @@ export const listSchools= async (req, res, next) => {
     latitude = parseFloat(latitude);
     longitude = parseFloat(longitude);
 
-    const [results] = await db.execute("SELECT * FROM schools");
+    const connection= getDB();
+    const [results] = await connection.execute("SELECT * FROM schools");
 
     const sorted = results.map((school) => {
       const distance = getDistance(
